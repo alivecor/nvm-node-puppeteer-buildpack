@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# install nvm and puppeteer for pdf creation
+export NVM_DIR="$HOME/.nvm" && (
+  git clone https://github.com/creationix/nvm.git "$NVM_DIR"
+  cd "$NVM_DIR"
+  git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`
+) && . "$NVM_DIR/nvm.sh" &&
+  nvm install v8.4.0 &&
+  export NODE_PATH=$HOME/.nvm/versions/node/v8.4.0/lib/node_modules &&
+  npm install -g puppeteer@0.9.0
+
