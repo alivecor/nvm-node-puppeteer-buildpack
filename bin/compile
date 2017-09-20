@@ -24,7 +24,7 @@ export NODE_PATH=$BUILD_DIR/.nvm/versions/node/v8.4.0/lib/node_modules
 echo "-----> Installing Puppeteer"
 npm install -g puppeteer@0.9.0
 
-echo "-----> Installing .profile.d"
+echo "-----> Installing .profile.d for nvm"
 mkdir -p ${BUILD_DIR}/.profile.d
 BUILDPACK_DIR=`cd $(dirname $0); cd ..; pwd`
 cp -n ${BUILDPACK_DIR}/.profile.d/* ${BUILD_DIR}/.profile.d/
