@@ -1,12 +1,25 @@
 #!/usr/bin/env bash
 
+set -e
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+BIN_PATH="$BUILD_DIR/bin"
+TMP_PATH="$BUILD_DIR/tmp"
+mkdir -p $CACHE_DIR $BIN_PATH $TMP_PATH
+
+echo "-----> Installing NVM"
+
 # install nvm and puppeteer for pdf creation
-export NVM_DIR="$HOME/.nvm" && (
+export NVM_DIR="$BUILD_DIR/.nvm" && (
   git clone https://github.com/creationix/nvm.git "$NVM_DIR"
   cd "$NVM_DIR"
   git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`
-) && . "$NVM_DIR/nvm.sh" &&
-  nvm install v8.4.0 &&
-  export NODE_PATH=$HOME/.nvm/versions/node/v8.4.0/lib/node_modules &&
-  npm install -g puppeteer@0.9.0
+) && . "$NVM_DIR/nvm.sh"
 
+echo "-----> Installing Node"
+nvm install v8.4.0
+export NODE_PATH=$BUILD_DIR/.nvm/versions/node/v8.4.0/lib/node_modules
+
+echo "-----> Installing Puppeteer"
+npm install -g puppeteer@0.9.0
